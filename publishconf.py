@@ -18,6 +18,9 @@ FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
+LINKS = (('Home', SITEURL),
+        ('Blog', SITEURL + '/blog'),
+        ('Projects', SITEURL + '/#projects'),)
 
 # Following items are often useful when publishing
 
