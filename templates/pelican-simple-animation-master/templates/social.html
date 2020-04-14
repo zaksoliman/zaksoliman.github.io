@@ -1,0 +1,13 @@
+<div id="social">
+    {% for name, link in SOCIAL %}
+        <a class="social" target="_blank" href="{{ link }}"><img src="{{ SITEURL }}/theme/images/{{ name }}.png" alt="{{ name | capitalize | replace ('Googlescholar','Google Scholar') }}"></a>
+    {% endfor %}
+    <div id="socialtext"></div>
+    <script>
+        var socialites = document.querySelectorAll('#social img');
+        for (var i = 0 ; i < socialites.length; i++){
+            socialites[i].onmouseover = function(e){document.getElementById("socialtext").innerHTML = this.alt;}
+            socialites[i].onmouseleave = function(e){document.getElementById("socialtext").innerHTML = '';} 
+        }
+    </script>
+</div>

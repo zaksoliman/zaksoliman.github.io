@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+        <meta name="author" content="{{ AUTHOR  }}" />
+        <meta charset="utf-8" />
+        {#<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css' />#}
+        {# CSS #}
+        <link rel="stylesheet" href="/theme/css/{{ CSS_FILE }}" type="text/css" />
+        {% block cssaddons %}
+        {% endblock %}
+        {# RSS #}
+        <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
+        {% if FEED_RSS %}
+        <link href="{{ SITEURL }}/{{ FEED_RSS }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+	 {# Javascript #}
+        {% block jshead %}
+        {% endblock %}
+</head>
+
+<body>
+       {% block titletext %}
+       {% endblock titletext %}
+       <div id="menu-icon" onclick="openNav()">&#9776;</div>
+       <div id="myNav" class="overlay">
+           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+           <div class="overlay-content">
+                
+                <ul id="menumenu">
+                    {% if MENUITEMS %}
+                    {% for name, link in MENUITEMS %}
+                    <li><a href="{{ SITEURL }}/{{ link }}">{{ name }}</a></li>
+                    {% endfor %}
+                    <hr>
+                    {% endif %}
+
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                    <li>PAGES</li>
+                    {% for page in PAGES %}
+                    <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
+                    {#{% if not loop.last %} ::{% endif %}#}
+                    {% endfor %}
+                    <hr>
+                    {% endif %}
+
+                    {% if WORKLINKS | length > 1 %}
+                    <li class="label">{{ WORKTITLE }}</li>
+                    {% for name, link in WORKLINKS %}
+                    <li><a href="{{ link }}">{{ name }}</a></li>
+                    {% endfor %}
+                    <hr>
+                    {% endif %}
+
+                    {# BLOG!!! #}
+                    {% if categories | length > 0 %}
+                    <li id="blogtitle"><a href="{{ SITEURL }}/{{ BLOGDIR }}">{{ BLOGTITLE  }}</a>
+                    <hr>
+                    {# List Blog categories and then individual posts #}
+                    <ul id="menu-categories">
+
+                        {# Set RECNET_BLOG in peliconconf.py to true to add the 5 most recent links #}
+                        {% if RECENT_BLOG  %}
+                        <li class="menu-category"><a href="{{ SITEURL  }}/{{ BLOGDIR  }}">Recent Posts</a>
+                        {% set recent = articles if not all_articles else all_articles %}
+                        <ul class="menu-category" id="recent-posts">
+                        {% for a in recent %}
+                        {% if loop.index < 6 %}
+                            <li>
+                                <a href="{{ SITEURL }}/{{ a.url }}">{{ a.title }}</a>
+                            </li>
+                        {% endif %}
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        {% for category, articles in categories %}
+                        <li class="menu-category"><a href="{{ SITEURL }}/{{category.url}}">{{ category }}</a>
+                        <ul>
+                            {% for article in articles  %}
+                            <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul> 
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+
+           </div>
+       </div>
+        <script src="/theme/js/menu.js"> </script>
+        <div id="content"> 
+            {% block content %}
+            {% endblock %}
+
+            {% include 'social.html' %}
+
+        </div>
+        <footer> Powered by <a href="http://getpelican.com/">Pelican</a> </footer>
+
+        {% include 'analytics.html' %}
+        {% block jsfoot %}
+        {% endblock %}
+</body>
+</html>

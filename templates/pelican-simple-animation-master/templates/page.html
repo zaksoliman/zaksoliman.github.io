@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ SITENAME }} - {{ page.title }}{% endblock %}
+{% block content %}     
+<canvas id="myCanvas"> </canvas>
+
+{#<header>
+    <h1><a href="{{ SITEURL }}/{{ page.slug }}" id="page-title">{{ page.title }}</a></h1>
+    <span id="sitename"><a href="{{ SITEURL }}" id="site-title">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></span> 
+</header>  #}
+<article>    
+    {{ page.content }}
+</article>
+
+{% endblock %}
+
+{% block jsfoot %}
+<script type="text/javascript" src="/theme/js/anim.js"> </script> {# if animationfile else themefile #}
+{% endblock %}

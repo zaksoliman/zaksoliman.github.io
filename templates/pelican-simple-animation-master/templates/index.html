@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block cssaddons %}
+<link rel="stylesheet" href="/theme/css/blog.css" type="text/css" />
+<link rel="stylesheet" href="/theme/css/prism.css" type="text/css" />
+{% endblock %}
+
+{% block titletext %}
+<div id="blogname">{% if BLOGTITLE %}{{ BLOGTITLE }}{% else %}{{ SITETITLE }}{% endif %} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</div> 
+{% endblock %}
+
+{% block content %}        
+    {% for article in articles_page.object_list %}
+            <h1 class="title">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+            </h1>
+            <div class="published"> {{ article.locale_date }}<br />
+                Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            </div>
+        <div class="entry-content"> {{ article.content}} </div>
+    {% endfor %}
+
+    <hr style="margin:30px">
+
+    {% if DEFAULT_PAGINATION %}
+    {% if articles_page.has_previous() or articles_page.has_next() %}
+    <p class="paginator">
+        {% if articles_page.has_previous() %}
+            {% if articles_page.previous_page_number() == 1 %}
+        <a href="{{ SITEURL }}/{{ page_name }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            {% else %}
+            <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.previous_page_number() }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            {% endif %} 
+            ::
+        {% endif %}
+        {% if articles_page.has_next() %}
+        <a href="{{ SITEURL }}/{{page_name | replace ('/index','') }}/page/{{ articles_page.next_page_number() }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        {% endif %} 
+    </p>
+    {% endif %}
+    {% endif %}
+
+{% endblock content %}

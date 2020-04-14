@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+
+{% block content %}        
+
+            <h1 class="title">
+                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+            </h1>
+            <div class="published"> {{ article.locale_date }}<br />
+                Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            </div>
+        <div class="entry-content"> {{ article.content}} </div>
+
+    {# Neighbor plugin stuff  #}
+    {% if article.prev_article or article.next_article %}
+    <hr style="margin:30px">
+    <p class="paginator">
+        {% if article.next_article %}
+            <a href="{{ SITEURL }}/{{ article.next_article.url }}">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+            ::
+        {% endif %}
+        {% if article.prev_article %}
+        <a href="{{ SITEURL }}/{{ article.prev_article.url }}">older&nbsp;&nbsp;&nbsp;&rarr;</a>
+        {% endif %}
+    </p>
+    {% endif %}
+{% endblock %}
