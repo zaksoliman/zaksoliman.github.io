@@ -25,4 +25,5 @@ LINKS = (('Home', SITEURL),
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS_ID = "UA-163682319-1"
+GOOGLE_ANALYTICS_PROP = "zaksoliman.com"
