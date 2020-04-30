@@ -54,8 +54,7 @@ LINKS = (('Home', SITEURL),
         ('Blog', SITEURL + '/blog'),
         ('Projects', SITEURL + '/#projects'),)
 
-SOCIAL = (('Email','mailto:zakaria.soliman1@gmail.com'),
-('GitHub','https://github.com/zaksoliman'),
+SOCIAL = (('GitHub','https://github.com/zaksoliman'),
 ('LinkedIn','https://www.linkedin.com/in/zsoliman/'),
 ('Twitter','https://twitter.com/ZackSoliman'),
 ('Instagram','https://www.instagram.com/vagabond_dev/'),)
